@@ -1,4 +1,5 @@
-
+import { Button } from "react-bootstrap";
+import classes from "./productscreen.module.css";
 
 const productsArr = [
     {
@@ -25,23 +26,31 @@ const productsArr = [
 
 const ProductScreen = () => {
     return (
-        productsArr.map((product) => {
+        <>
+        <div className="container text-center mt-4">
+        <div className="row">
+          {productsArr.map((product, index) => {
             return (
-                <>
-                    <div>
-                        <h3>{product.title}</h3>
-                        <img src={product.imageUrl} alt={product.title} width="200" />
-                        <div>
-                            <p1>{product.price}</p1>
-                        </div>
-                    </div>
-                    <div>
-
-                        <button>ADD TO CART</button>
-                    </div>
-                </>
+              <div className="col-lg-6 mb-6" key={index}>
+                <div className={classes.productCard}>
+                  <h3>{product.title}</h3>
+                  <div className={classes.imageWrapper}>
+                    <img
+                      src={product.imageUrl}
+                      alt="Product"
+                    />
+                  </div>
+                  <p>${product.price}</p>
+                  <Button variant="info" className="col-lg-4">
+                    ADD TO CART
+                  </Button>
+                </div>
+              </div>
             );
-        })
+          })}
+        </div>
+      </div>
+        </>
     );
 }
 
