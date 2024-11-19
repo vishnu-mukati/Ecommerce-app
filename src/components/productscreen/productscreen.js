@@ -1,5 +1,8 @@
+import React, { useState, useContext } from "react";
 import { Button } from "react-bootstrap";
 import classes from "./productscreen.module.css";
+import CartContext from "../store/Cart-Context";
+
 
 const productsArr = [
     {
@@ -25,31 +28,42 @@ const productsArr = [
 ]
 
 const ProductScreen = () => {
+
+    const cartContext = useContext(CartContext);
+    
+
+
+    const addToCartHandler = (product) => {
+        const productWithQuantity = { ...product,quantity :1}; // Add quantity here
+        cartContext.addItem(productWithQuantity);
+    }
+    
+    console.log(cartContext.items);
     return (
         <>
-        <div className="container text-center mt-4">
-        <div className="row">
-          {productsArr.map((product, index) => {
-            return (
-              <div className="col-lg-6 mb-6" key={index}>
-                <div className={classes.productCard}>
-                  <h3>{product.title}</h3>
-                  <div className={classes.imageWrapper}>
-                    <img
-                      src={product.imageUrl}
-                      alt="Product"
-                    />
-                  </div>
-                  <p>${product.price}</p>
-                  <Button variant="info" className="col-lg-4">
-                    ADD TO CART
-                  </Button>
+            <div className="container text-center mt-4">
+                <div className="row">
+                    {productsArr.map((product, index) => {
+                        return (
+                            <div className="col-lg-6 mb-6" key={index}>
+                                <div className={classes.productCard}>
+                                    <h3>{product.title}</h3>
+                                    <div className={classes.imageWrapper}>
+                                        <img
+                                            src={product.imageUrl}
+                                            alt="Product"
+                                        />
+                                    </div>
+                                    <p>${product.price}</p>
+                                    <Button variant="info" className="col-lg-4" onClick={() => {addToCartHandler(product) }}>
+                                        ADD TO CART
+                                    </Button>
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+            </div>
         </>
     );
 }
