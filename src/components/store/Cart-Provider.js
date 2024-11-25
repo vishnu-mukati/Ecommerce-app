@@ -1,51 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CartContext from "./Cart-Context";
 
 const CartProvider = (props) => {
     const [items, setItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
 
-       
+
+
+
+    useEffect(() => {
+        const calculatedTotalAmount = items.reduce((total, item) => {
+            return total + item.price * item.quantity;
+        }, 0);
+        setTotalAmount(calculatedTotalAmount);
+        console.log(calculatedTotalAmount);
+    }, [items]);
+
 
     const addItemToCartHandler = (item) => {
-            const existingElementindex = items.findIndex((i) => i.id === item.id);
-            if (existingElementindex === -1) {
-                setItems((prevItems) => {
-                    return [...prevItems, item];
-                });
-            }
-            else {
-                const temp = [...items];
-                temp[existingElementindex].quantity = temp[existingElementindex].quantity + item.quantity;
-                setItems(temp);
-            }
-    }
-
-        const removeItemFromCartHandler = (id) => {
-            setItems((prevItems) => prevItems.filter(item => item.id !== id));
-        };
-
-        const increaseQuantityHandler = (itemId) => {
+        const existingdata = items.findIndex((i) => i.id === item.id);
+        if (existingdata === -1) {
             setItems((prevState) => {
                 return (
-                    prevState.map((item) => (
-                        item.id === itemId ? { ...item, amount: item.amount + 1 } : item
-                    ))
+                    [...prevState, item]
                 );
-            })
-        };
+            });
+        }
+        else {
+            alert('this item is already exist');
+        }
+    }
 
-        const cartContext = {
-            items: items,
-            totalAmount: totalAmount,
-            addItem: addItemToCartHandler,
-            removeItem: removeItemFromCartHandler,
-            increaseQuantity: increaseQuantityHandler,
-        };
+    const removeItemFromCartHandler = (id, price) => {
 
-        return <CartContext.Provider value={cartContext}>
-            {props.children}
-        </CartContext.Provider>;
+        setTotalAmount((prevState) => prevState - price);
+        setItems((prevItems) => prevItems.filter((item) => item.id !== id)) 
     };
 
-    export default CartProvider;
+
+
+    const cartContext = {
+        items: items,
+        totalAmount: totalAmount,
+        addItem: addItemToCartHandler,
+        removeItem: removeItemFromCartHandler,
+        // increaseQuantity: increaseQuantityHandler,
+    };
+
+    return <CartContext.Provider value={cartContext}>
+        {props.children}
+    </CartContext.Provider>;
+};
+
+export default CartProvider;

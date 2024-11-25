@@ -15,11 +15,8 @@ const Navigationbar = () => {
         setShowCart(false);
     }
     
-    console.log(Cartctx.items)
-    const numberOfCartItems = Cartctx.items.reduce((currNumber, item) => {
-
-        return currNumber + item.quantity;
-      }, 0)
+    const quantity = Cartctx.items.length;
+   
     
     return (
         <Navbar bg="dark" expand="sm" variant="dark">
@@ -33,7 +30,7 @@ const Navigationbar = () => {
                     </Nav>
                     <Nav className="ms-auto">
                         <Button onClick={clickCartHandler}  className="ms-auto">Cart</Button>
-                        <Nav.Link  variant="danger">{numberOfCartItems}</Nav.Link>
+                        <Nav.Link  variant="danger">{quantity}</Nav.Link>
                         {showCart && <Cart onClose={closeCartHandler} />}
                     </Nav>
                 </Navbar.Collapse>

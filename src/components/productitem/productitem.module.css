@@ -1,0 +1,39 @@
+.productCard {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+  }
+  
+  .productCard h3 {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .imageWrapper {
+    width: 200px; /* Fixed width of the image */
+    height: 200px; /* Fixed height of the image */
+    overflow: hidden; /* Ensures the image doesn't overflow */
+    margin: 0 auto; /* Center the image wrapper */
+    position: relative;
+  }
+  
+  .imageWrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Keeps the aspect ratio of the image */
+    transition: transform 0.7s ease; /* Smooth zoom effect */
+  }
+  
+  .imageWrapper img:hover {
+    transform: scale(1.5); /* Zooms the image content (inside the boundaries) */
+  }
+  
+  .productCard p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
