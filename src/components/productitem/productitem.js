@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import classes from "./productitem.module.css";
 import CartContext from "../store/Cart-Context";
 const ProductItem = (props) => {
@@ -14,7 +14,7 @@ const ProductItem = (props) => {
 
     const cartctx = useContext(CartContext);
     const addtoCartHandler = (data) => {
-         cartctx.addItem({...data ,quantity:1});
+        cartctx.addItem({ ...data, quantity: 1 });
     }
 
     return (
@@ -22,7 +22,7 @@ const ProductItem = (props) => {
         <Fragment>
             <div className="container text-center mt-4">
                 <div className="row">
-                    <div className="col-lg-6 mb-6" key={props.index}>
+                    <div className="col-lg-4 mb-5" key={props.index}>
                         <div className={classes.productCard}>
                             <h3>{props.title}</h3>
                             <div className={classes.imageWrapper}>
@@ -39,6 +39,7 @@ const ProductItem = (props) => {
                     </div>
                 </div>
             </div>
+
         </Fragment>
 
     );
