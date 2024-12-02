@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import {useLocation } from "react-router-dom";
 import Cart from "../cart/Cart";
 import CartContext from "../store/Cart-Context";
 
@@ -31,6 +31,7 @@ const Navigationbar = () => {
                         <Nav.Link href="/">Home</Nav.Link>
                         <Nav.Link href="/store">Store</Nav.Link>
                         <Nav.Link href="/about" >About </Nav.Link>
+                        <Nav.Link href="/contect-us">Contect-Us</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         {isStorePage &&

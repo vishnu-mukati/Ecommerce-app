@@ -63,7 +63,7 @@ const Home = () => {
 
             <Container>
                 <Row>
-                    <Col className=" text-center ,col-xxl" style={{
+                    <Col className="col-xxl" style={{
                         boxSizing: "border-box",
                         color: "white",
                         background: "rgb(86, 204, 242)",

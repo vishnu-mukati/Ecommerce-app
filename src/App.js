@@ -5,25 +5,44 @@ import CartProvider from "./components/store/Cart-Provider";
 import About from "./components/navbar-component/about";
 import Home from "./components/navbar-component/home"
 import Heading from "./components/Heading/Heading";
+import ContectUs from "./components/navbar-component/Contact Us";
+import { useCallback } from "react";
 
+
+function App() {
+
+  const addDataHandler = useCallback(async(userdata) =>{
+    const response = await fetch('https://react-http-b44c1-default-rtdb.firebaseio.com/userdata.json',{
+      method:'POST',
+      body: JSON.stringify(userdata),
+      headers:{
+         'Content-Type': 'application/json'
+      }
+    })  
+    const data = await response.json();
+
+  })
+
+  
 const router = createBrowserRouter([
   {
     path: "/",
-    element:(
-       <>
-          <Navbar/>
-          <h1 style={{textAlign:"center",
+    element: (
+      <>
+        <Navbar />
+        <h1 style={{
+          textAlign: "center",
           color: "white", // Green color for the text
           fontFamily: "Times New Roman", // Font style
-          backgroundColor:"grey", // Light background color
+          backgroundColor: "grey", // Light background color
           paddingBottom: "100px",
           borderRadius: "8px",
           marginTop: "2px",
-          fontWeight:"bold",
-          fontSize:"70px"
-        }}>The Generics {<Heading style={{color:"blue"}}/>}</h1>
-          <Home/>
-       </>
+          fontWeight: "bold",
+          fontSize: "70px"
+        }}>The Generics {<Heading style={{ color: "blue" }} />}</h1>
+        <Home />
+      </>
     ),
   },
   {
@@ -31,15 +50,16 @@ const router = createBrowserRouter([
     element: (
       <>
         <Navbar />
-        <h1 style={{textAlign:"center",
+        <h1 style={{
+          textAlign: "center",
           color: "white", // Green color for the text
           fontFamily: "Times New Roman", // Font style
-          backgroundColor:"grey", // Light background color
+          backgroundColor: "grey", // Light background color
           paddingBottom: "100px",
           borderRadius: "8px",
           marginTop: "2px",
-          fontWeight:"bold",
-          fontSize:"70px"
+          fontWeight: "bold",
+          fontSize: "70px"
         }}>The Generics</h1>
         <ProductScreen />
       </>
@@ -47,28 +67,39 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: 
-    <>
-      <Navbar />
-      <h1 style={{textAlign:"center",
+    element:
+      <>
+        <Navbar />
+        <h1 style={{
+          textAlign: "center",
           color: "white", // Green color for the text
           fontFamily: "Times New Roman", // Font style
-          backgroundColor:"grey", // Light background color
+          backgroundColor: "grey", // Light background color
           paddingBottom: "100px",
           borderRadius: "8px",
           marginTop: "2px",
-          fontWeight:"bold",
-          fontSize:"70px"
+          fontWeight: "bold",
+          fontSize: "70px"
         }}>The Generics</h1>
-      <About />
-    </>
+        <About />
+      </>
   },
+  {
+    path: "/contect-us",
+    element:
+      <>
+        <Navbar />
+        <ContectUs onAddData = {addDataHandler}/>
+      </>
+  }
 ])
 
-function App() {
+  
+
   return (
     <CartProvider>
       <RouterProvider router={router} />
+
     </CartProvider>
   );
 }
