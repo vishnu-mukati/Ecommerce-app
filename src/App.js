@@ -1,105 +1,60 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProductScreen from "./components/productscreen/productscreen";
-import Navbar from "./components/navbar/Navbar";
-import CartProvider from "./components/store/Cart-Provider";
-import About from "./components/navbar-component/about";
-import Home from "./components/navbar-component/home"
-import Heading from "./components/Heading/Heading";
-import ContectUs from "./components/navbar-component/Contact Us";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+import ProductScreen from "./components/ProductScreen/ProductScreen";
+import Navbar from "./components/Navbar/Navbar";
+import CartProvider from "./components/Store/CartProvider";
+import About from "./components/navbar-component/About";
+import Home from "./components/navbar-component/Home"
+import ContectUs from "./components/navbar-component/ContactUs";
 import { useCallback } from "react";
+import Generics from "./components/Generics/Generics";
+import GenericsButton from "./components/Generics/GenericsButton";
+import ProdutDetail from "./components/ProdutDetail/ProdutDetail";
 
 
 function App() {
 
-  const addDataHandler = useCallback(async(userdata) =>{
-    const response = await fetch('https://react-http-b44c1-default-rtdb.firebaseio.com/userdata.json',{
-      method:'POST',
+  const addDataHandler = useCallback(async (userdata) => {
+    const response = await fetch('https://react-http-b44c1-default-rtdb.firebaseio.com/userdata.json', {
+      method: 'POST',
       body: JSON.stringify(userdata),
-      headers:{
-         'Content-Type': 'application/json'
+      headers: {
+        'Content-Type': 'application/json'
       }
-    })  
+    })
     const data = await response.json();
 
   })
 
-  
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: (
-      <>
-        <Navbar />
-        <h1 style={{
-          textAlign: "center",
-          color: "white", // Green color for the text
-          fontFamily: "Times New Roman", // Font style
-          backgroundColor: "grey", // Light background color
-          paddingBottom: "100px",
-          borderRadius: "8px",
-          marginTop: "2px",
-          fontWeight: "bold",
-          fontSize: "70px"
-        }}>The Generics {<Heading style={{ color: "blue" }} />}</h1>
-        <Home />
-      </>
-    ),
-  },
-  {
-    path: "/store",
-    element: (
-      <>
-        <Navbar />
-        <h1 style={{
-          textAlign: "center",
-          color: "white", // Green color for the text
-          fontFamily: "Times New Roman", // Font style
-          backgroundColor: "grey", // Light background color
-          paddingBottom: "100px",
-          borderRadius: "8px",
-          marginTop: "2px",
-          fontWeight: "bold",
-          fontSize: "70px"
-        }}>The Generics</h1>
-        <ProductScreen />
-      </>
-    ),
-  },
-  {
-    path: "/about",
-    element:
-      <>
-        <Navbar />
-        <h1 style={{
-          textAlign: "center",
-          color: "white", // Green color for the text
-          fontFamily: "Times New Roman", // Font style
-          backgroundColor: "grey", // Light background color
-          paddingBottom: "100px",
-          borderRadius: "8px",
-          marginTop: "2px",
-          fontWeight: "bold",
-          fontSize: "70px"
-        }}>The Generics</h1>
-        <About />
-      </>
-  },
-  {
-    path: "/contect-us",
-    element:
-      <>
-        <Navbar />
-        <ContectUs onAddData = {addDataHandler}/>
-      </>
-  }
-])
-
-  
-
   return (
     <CartProvider>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact >
+           <Redirect to="/home"/>
+          </Route>
+          <Route path="/home" exact >
+            <GenericsButton />
+            <Home />
+          </Route>
 
+          <Route path="/store">
+            <Generics />
+            <ProductScreen />
+          </Route>
+
+          <Route path = "/product-details/:id" component={ProdutDetail}/>
+          <Route path="/about">
+            <Generics />
+            <About />
+          </Route>
+
+          <Route path="/contect-us">
+            <ContectUs onAddData={addDataHandler} />
+          </Route>
+
+        </Switch>
+      </BrowserRouter>
     </CartProvider>
   );
 }

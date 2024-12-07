@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import CartContext from "./Cart-Context";
+import CartContext from "./CartContext";
 
 const CartProvider = (props) => {
     const [items, setItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
-
 
 
 
@@ -13,7 +12,6 @@ const CartProvider = (props) => {
             return total + item.price * item.quantity;
         }, 0);
         setTotalAmount(calculatedTotalAmount);
-        console.log(calculatedTotalAmount);
     }, [items]);
 
 
@@ -44,7 +42,6 @@ const CartProvider = (props) => {
         totalAmount: totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
-        // increaseQuantity: increaseQuantityHandler,
     };
 
     return <CartContext.Provider value={cartContext}>

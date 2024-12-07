@@ -39,7 +39,7 @@ const Home = () => {
     return (
         <>
             <h1 className="text-center">Tours</h1>
-            <Container>
+            <Container > 
                 <Row className="mt-4">
                     <Col className="text-center col-xxl">
                         <Table striped bordered hover style={{ width: "100%" }}>
@@ -61,7 +61,7 @@ const Home = () => {
                 </Row>
             </Container>
 
-            <Container>
+            <div className="text-center">
                 <Row>
                     <Col className="col-xxl" style={{
                         boxSizing: "border-box",
@@ -75,7 +75,7 @@ const Home = () => {
                 <Row>
                     <Col></Col>
                 </Row>
-            </Container>
+            </div>
         </>
     );
 }

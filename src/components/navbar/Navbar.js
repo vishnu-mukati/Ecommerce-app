@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import {useLocation } from "react-router-dom";
-import Cart from "../cart/Cart";
-import CartContext from "../store/Cart-Context";
+import Cart from "../Cart/Cart";
+import CartContext from "../Store/CartContext";
 
 const Navigationbar = () => {
     const [showCart, setShowCart] = useState(false);
@@ -28,7 +28,7 @@ const Navigationbar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse>
                     <Nav >
-                        <Nav.Link href="/">Home</Nav.Link>
+                        <Nav.Link href="/home">Home</Nav.Link>
                         <Nav.Link href="/store">Store</Nav.Link>
                         <Nav.Link href="/about" >About </Nav.Link>
                         <Nav.Link href="/contect-us">Contect-Us</Nav.Link>

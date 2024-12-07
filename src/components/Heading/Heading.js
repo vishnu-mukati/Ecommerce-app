@@ -1,5 +1,5 @@
 import { Nav } from "react-bootstrap";
-import PlayButton from "../icon/icon";
+import PlayButton from "../icon/PlayButton";
 
 const Heading = () => {
   return (

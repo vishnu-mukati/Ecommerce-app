@@ -1,13 +1,15 @@
 import React, { Fragment, useContext } from "react";
 import { Button, Container, Row, Col } from "react-bootstrap";
 import classes from "./productitem.module.css";
-import CartContext from "../store/Cart-Context";
+import CartContext from "../Store/CartContext";
+import { Link } from "react-router-dom";
 const ProductItem = (props) => {
 
     const dataobj = {
         id: props.id,
         title: props.title,
         image: props.image,
+        reviews : props.reviews,
         price: props.price,
     }
 
@@ -26,10 +28,14 @@ const ProductItem = (props) => {
                         <div className={classes.productCard}>
                             <h3>{props.title}</h3>
                             <div className={classes.imageWrapper}>
-                                <img
-                                    src={props.image}
-                                    alt="Product"
-                                />
+                                <Link to={{
+                                    pathname: `/product-details/${props.id}`,
+                                    state: { product: dataobj }, // Pass the product object
+                                }} ><img
+                                        src={props.image}
+                                        alt="Product"
+                                    />
+                                </Link>
                             </div>
                             <p>${props.price}</p>
                             <Button variant="info" className="col-lg-4" onClick={(() => { addtoCartHandler(dataobj) })}>
