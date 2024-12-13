@@ -44,9 +44,9 @@ const Home = () => {
                     <Col className="text-center col-xxl">
                         <Table striped bordered hover style={{ width: "100%" }}>
                             <tbody>
-                                {tourdata.map((item) => {
+                                {tourdata.map((item , index) => {
                                     return (
-                                        <tr style={{ borderBottom: "1px solid black" }}>
+                                        <tr key={index} style={{ borderBottom: "1px solid black" }}>
                                             <td>{item.date}</td>
                                             <td>{item.place}</td>
                                             <td>{item.Theatre}</td>

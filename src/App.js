@@ -9,6 +9,7 @@ import { useCallback } from "react";
 import Generics from "./components/Generics/Generics";
 import GenericsButton from "./components/Generics/GenericsButton";
 import ProdutDetail from "./components/ProdutDetail/ProdutDetail";
+import AuthForm from "./components/Auth/AuthForm";
 
 
 function App() {
@@ -51,6 +52,10 @@ function App() {
 
           <Route path="/contect-us">
             <ContectUs onAddData={addDataHandler} />
+          </Route>
+
+          <Route path="/auth">
+            <AuthForm/>
           </Route>
 
         </Switch>
