@@ -3,11 +3,13 @@ import { Button, Navbar, Container, Nav } from "react-bootstrap";
 import {useLocation,Link } from "react-router-dom";
 import Cart from "../Cart/Cart";
 import CartContext from "../Store/CartContext";
+import AuthContext from "../Store/auth-context";
 
 const Navigationbar = () => {
     const [showCart, setShowCart] = useState(false);
     const Cartctx = useContext(CartContext);
-
+    const cartCtx = useContext(AuthContext);
+    console.log(cartCtx.isLoggedIn);
     const location = useLocation();
 
     const clickCartHandler = () => {
@@ -32,7 +34,7 @@ const Navigationbar = () => {
                         <Nav.Link as={Link} to="/store">Store</Nav.Link>
                         <Nav.Link as={Link} to="/about" >About </Nav.Link>
                         <Nav.Link as={Link} to="/contect-us">Contect-Us</Nav.Link>
-                        <Nav.Link as={Link} to="/auth">Log In</Nav.Link>
+                        <Nav.Link as={Link} to="/auth">{!cartCtx.isLoggedIn ? 'Log In' : 'Log Out'}</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         {isStorePage &&

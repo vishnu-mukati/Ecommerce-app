@@ -5,10 +5,11 @@ import CartProvider from "./components/Store/CartProvider";
 import About from "./components/navbar-component/About";
 import Home from "./components/navbar-component/Home"
 import ContectUs from "./components/navbar-component/ContactUs";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import Generics from "./components/Generics/Generics";
 import GenericsButton from "./components/Generics/GenericsButton";
 import ProdutDetail from "./components/ProdutDetail/ProdutDetail";
+import AuthContext from "./components/Store/auth-context";
 import AuthForm from "./components/Auth/AuthForm";
 
 
@@ -26,6 +27,8 @@ function App() {
 
   })
 
+  const cartCtx = useContext(AuthContext)
+  
   return (
     <CartProvider>
       <BrowserRouter>
@@ -39,10 +42,11 @@ function App() {
             <Home />
           </Route>
 
-          <Route path="/store">
-            <Generics />
-            <ProductScreen />
-          </Route>
+           <Route path="/store">
+            {cartCtx.isLoggedIn &&<Generics />}
+              {cartCtx.isLoggedIn &&<ProductScreen />}
+              {!cartCtx.isLoggedIn && <Redirect to="/auth"/>}
+          </Route>  
 
           <Route path = "/product-details/:id" component={ProdutDetail}/>
           <Route path="/about">

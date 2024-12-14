@@ -11,13 +11,21 @@ const ProductItem = (props) => {
         image: props.image,
         reviews : props.reviews,
         price: props.price,
-    }
+    };
 
-
+    console.log(dataobj);
     const cartctx = useContext(CartContext);
     const addtoCartHandler = (data) => {
         cartctx.addItem({ ...data, quantity: 1 });
     }
+
+    
+
+//    const data =  cartctx.products.findIndex((i)=>i.id===props.id).filter();
+
+//    const product = data[0];
+    
+    
 
     return (
 
@@ -28,10 +36,10 @@ const ProductItem = (props) => {
                         <div className={classes.productCard}>
                             <h3>{props.title}</h3>
                             <div className={classes.imageWrapper}>
-                                <Link to={{
-                                    pathname: `/product-details/${props.id}`,
-                                    state: { product: dataobj }, // Pass the product object
-                                }} ><img
+                                <Link 
+                                    to= {`/product-details/${props.id}`}
+                                    // state: { product: dataobj }, // Pass the product object
+                                ><img
                                         src={props.image}
                                         alt="Product"
                                     />

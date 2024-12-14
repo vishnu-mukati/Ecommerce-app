@@ -2,9 +2,42 @@ import React, { useState, useEffect } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = (props) => {
+    const initialState = [
+        {
+            id: 1,
+            title: 'Colors',
+            price: 100,
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
+            reviews : "4★ it is a good product"
+        },
+        {
+            id: 2,
+            title: 'Black and white Colors',
+            price: 50,
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
+            reviews : "5★ nice product"
+        },
+        {
+            id: 3,
+            title: 'Yellow and Black Colors',
+            price: 70,
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
+            reviews : "3★ good"
+        },
+        {
+            id: 4,
+            title: 'Blue Color',
+            price: 100,
+            imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%204.png',
+            reviews : "5★ it is a good product"
+        }
+    ]
+
+    const [products,setProducts] = useState(initialState)
     const [items, setItems] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
 
+    console.log(products);
 
 
     useEffect(() => {
@@ -40,6 +73,7 @@ const CartProvider = (props) => {
     const cartContext = {
         items: items,
         totalAmount: totalAmount,
+        products : products,
         addItem: addItemToCartHandler,
         removeItem: removeItemFromCartHandler,
     };
