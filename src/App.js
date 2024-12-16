@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import ProductScreen from "./components/ProductScreen/ProductScreen";
-import Navbar from "./components/Navbar/Navbar";
 import CartProvider from "./components/Store/CartProvider";
 import About from "./components/navbar-component/About";
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/navbar-component/Home"
 import ContectUs from "./components/navbar-component/ContactUs";
 import { useCallback, useContext } from "react";
@@ -59,7 +59,8 @@ function App() {
           </Route>
 
           <Route path="/auth">
-            <AuthForm/>
+            {!cartCtx.isLoggedIn &&<AuthForm/>}
+            {cartCtx.isLoggedIn && <Redirect to="/store"/>}
           </Route>
 
         </Switch>

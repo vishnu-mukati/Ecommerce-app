@@ -22,6 +22,7 @@ const AuthForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
 
+
     setIsLoading(true);
 
     let url;
@@ -54,8 +55,7 @@ const AuthForm = () => {
         })
       }
     }).then((data) => {
-      console.log(data);
-      authCtx.login(data.idToken);
+      authCtx.login(data.idToken,data.email);
     }).catch((error) => {
       alert(error.message);
     })
@@ -66,7 +66,7 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
-      <h1>{isLogin && 'Login' }</h1>
+      <h1>{isLogin ? 'Login' : 'signup' }</h1>
       <form onSubmit={formSubmitHandler}>
         <div className={classes.control}>
           <label htmlFor='email'>Your Email</label>
@@ -83,18 +83,18 @@ const AuthForm = () => {
         </div>
 
         <div className={classes.actions}>
-          {!isLoading && <button type='submit' className={classes.actions} >{isLogin && 'Login' }</button>}
+          {!isLoading && <button type='submit' className={classes.actions} >{isLogin ? 'Login' : 'signup' }</button>}
           {isLoading && <p>Sending request...</p>}
         </div>
 
         <div className={classes.actions}>
-          {/* <button
+          <button
             type='button'
             className={classes.toggle}
             onClick={switchAuthModeHandler}
           >
-            {/* {isLogin ? 'Create new account' : 'Login with existing account'}
-          </button> */}
+             {isLogin ? 'Create new account' : 'Login with existing account'}
+          </button>
         </div>
       </form>
     </section>

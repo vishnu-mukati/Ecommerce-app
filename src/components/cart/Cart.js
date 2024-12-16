@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Button, Container, Row, Col, Table } from "react-bootstrap";
 import classes from "./Cart.module.css";
 import CartContext from "../Store/CartContext";
-
 const Cart = (props) => {
 
     const cartContext = useContext(CartContext);
     const cartItems = cartContext.items;
 
+    
 
     const removeFromCartHandler = (id) => {
         cartContext.removeItem(id);
@@ -32,16 +32,17 @@ const Cart = (props) => {
                                     </thead>
                                     <tbody>
                                         {cartItems.map((Elements, index) => {
+                                            
                                             return (
                                                 <tr key={index} style={{ verticalAlign: "middle" }}>
                                                     <td>
-                                                        <img src={Elements.image} alt="color image" width="90" />
+                                                        <img src={Elements.item.image} alt="color image" width="90" />
 
-                                                        {Elements.title}
+                                                        {Elements.item.title}
 
                                                     </td>
-                                                    <td >{Elements.price}</td>
-                                                    <td >{Elements.quantity}{<Button variant="danger" onClick={(() => { removeFromCartHandler(Elements.id, Elements.price) })}>REMOVE</Button>}</td>
+                                                    <td >{Elements.item.price}</td>
+                                                    <td >{Elements.item.quantity}{<Button variant="danger" onClick={(() => { removeFromCartHandler(Elements._id, Elements.price) })}>REMOVE</Button>}</td>
                                                 </tr>
                                             );
                                         })}

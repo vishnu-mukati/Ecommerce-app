@@ -4,14 +4,13 @@ import CartContext from "../Store/CartContext";
 
 const ProdutDetail = () =>{
     const params=useParams();
-    console.log(params.id);
 
     const cartctx = useContext(CartContext);
 
     
     // const product = cartctx.products.findIndex((i) => i.id === params.id);
     const product = cartctx.products.find((i) => i.id === parseInt(params.id));
-    console.log(product);
+   
 
     return (
         <section className="text-center">

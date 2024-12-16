@@ -3,6 +3,7 @@ import { Button, Container, Row, Col } from "react-bootstrap";
 import classes from "./productitem.module.css";
 import CartContext from "../Store/CartContext";
 import { Link } from "react-router-dom";
+import AuthContext from "../Store/auth-context";
 const ProductItem = (props) => {
 
     const dataobj = {
@@ -13,17 +14,19 @@ const ProductItem = (props) => {
         price: props.price,
     };
 
-    console.log(dataobj);
+    const cartCtx = useContext(AuthContext);
+
+    const emailId = cartCtx.email.replace(/[@.]/g, "");
+
+
+
     const cartctx = useContext(CartContext);
-    const addtoCartHandler = (data) => {
-        cartctx.addItem({ ...data, quantity: 1 });
+    const addtoCartHandler = (data,emailId) => {
+        cartctx.addItem({ ...data,quantity: 1 },emailId);
     }
 
     
 
-//    const data =  cartctx.products.findIndex((i)=>i.id===props.id).filter();
-
-//    const product = data[0];
     
     
 
@@ -46,7 +49,7 @@ const ProductItem = (props) => {
                                 </Link>
                             </div>
                             <p>${props.price}</p>
-                            <Button variant="info" className="col-lg-4" onClick={(() => { addtoCartHandler(dataobj) })}>
+                            <Button variant="info" className="col-lg-4" onClick={(() => { addtoCartHandler(dataobj,emailId) })}>
                                 ADD TO CART
                             </Button>
                         </div>
